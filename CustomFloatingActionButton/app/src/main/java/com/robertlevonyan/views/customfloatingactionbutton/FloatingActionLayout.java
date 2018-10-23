@@ -33,6 +33,7 @@ public class FloatingActionLayout extends FrameLayout {
     private int fabType;
     private float fabElevation;
     private int fabColor;
+    private int fabRippleColor;
 
     private boolean isCreated;
 
@@ -60,6 +61,7 @@ public class FloatingActionLayout extends FrameLayout {
         fabType = ta.getInt(R.styleable.FloatingActionButton_fabType, FAB_TYPE_CIRCLE);
         fabElevation = ta.getDimension(R.styleable.FloatingActionButton_fabElevation, getResources().getDimension(R.dimen.fab_default_elevation));
         fabColor = ta.getColor(R.styleable.FloatingActionButton_fabColor, ContextCompat.getColor(getContext(), R.color.colorAccent));
+        fabRippleColor = ta.getColor(R.styleable.FloatingActionButton_fabRippleColor, Color.argb(150, 255, 255, 255));
 
         ta.recycle();
     }
@@ -93,13 +95,13 @@ public class FloatingActionLayout extends FrameLayout {
 
         Drawable selectableDrawable;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            selectableDrawable = new RippleDrawable(ColorStateList.valueOf(Color.argb(150, 255, 255, 255)),
+            selectableDrawable = new RippleDrawable(ColorStateList.valueOf(fabRippleColor),
                     null, backgroundDrawable);
         } else {
             StateListDrawable stateListDrawable = new StateListDrawable();
             stateListDrawable.setExitFadeDuration(400);
             stateListDrawable.setAlpha(45);
-            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(Color.argb(150, 255, 255, 255)));
+            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(fabRippleColor));
             stateListDrawable.addState(new int[]{}, new ColorDrawable(Color.TRANSPARENT));
 
             selectableDrawable = stateListDrawable;

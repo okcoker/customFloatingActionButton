@@ -43,6 +43,7 @@ public class FloatingActionButton extends android.support.v7.widget.AppCompatTex
     private int fabTextColor;
     private float fabElevation;
     private int fabColor;
+    private int fabRippleColor;
     private Drawable fabIcon;
     private int fabIconColor;
     private int fabIconPosition;
@@ -74,6 +75,7 @@ public class FloatingActionButton extends android.support.v7.widget.AppCompatTex
         fabTextColor = ta.getColor(R.styleable.FloatingActionButton_fabTextColor, ContextCompat.getColor(getContext(), R.color.colorFabText));
         fabElevation = ta.getDimension(R.styleable.FloatingActionButton_fabElevation, getResources().getDimension(R.dimen.fab_default_elevation));
         fabColor = ta.getColor(R.styleable.FloatingActionButton_fabColor, ContextCompat.getColor(getContext(), R.color.colorAccent));
+        fabRippleColor = ta.getColor(R.styleable.FloatingActionButton_fabRippleColor, Color.argb(150, 255, 255, 255));
         fabIcon = ta.getDrawable(R.styleable.FloatingActionButton_fabIcon);
         fabIconColor = ta.getColor(R.styleable.FloatingActionButton_fabIconColor, -1);
 
@@ -108,15 +110,16 @@ public class FloatingActionButton extends android.support.v7.widget.AppCompatTex
 
         backgroundDrawable.mutate().setColorFilter(fabColor, PorterDuff.Mode.SRC_IN);
 
+
         Drawable selectableDrawable;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            selectableDrawable = new RippleDrawable(ColorStateList.valueOf(Color.argb(150, 255, 255, 255)),
+            selectableDrawable = new RippleDrawable(ColorStateList.valueOf(fabRippleColor),
                     null, backgroundDrawable);
         } else {
             StateListDrawable stateListDrawable = new StateListDrawable();
             stateListDrawable.setExitFadeDuration(400);
             stateListDrawable.setAlpha(45);
-            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(Color.argb(150, 255, 255, 255)));
+            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(fabRippleColor));
             stateListDrawable.addState(new int[]{}, new ColorDrawable(Color.TRANSPARENT));
 
             selectableDrawable = stateListDrawable;
@@ -337,6 +340,15 @@ public class FloatingActionButton extends android.support.v7.widget.AppCompatTex
 
     public void setFabColor(int fabColor) {
         this.fabColor = fabColor;
+        buildView();
+    }
+
+    public int getFabRippleColor() {
+        return fabRippleColor;
+    }
+
+    public void setFabRippleColor(int fabRippleColor) {
+        this.fabRippleColor = fabRippleColor;
         buildView();
     }
 

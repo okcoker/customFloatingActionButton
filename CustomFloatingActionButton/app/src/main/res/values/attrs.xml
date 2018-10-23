@@ -15,6 +15,7 @@
         <attr name="fabTextColor" format="color" />
         <attr name="fabElevation" format="dimension" />
         <attr name="fabColor" format="color" />
+        <attr name="fabRippleColor" format="color" />
         <attr name="fabIcon" format="integer" />
         <attr name="fabIconColor" format="color" />
         <attr name="fabIconPosition" format="enum">
