@@ -11,6 +11,7 @@
             <enum name="mini" value="11" />
         </attr>
         <attr name="fabText" format="string" />
+        <attr name="fabAnimateMenu" format="boolean" />
         <attr name="fabTextAllCaps" format="boolean" />
         <attr name="fabTextColor" format="color" />
         <attr name="fabElevation" format="dimension" />
